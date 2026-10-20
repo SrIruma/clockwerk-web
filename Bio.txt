@@ -1,0 +1,80 @@
+[CENTER][SIZE=6][B][COLOR=#2BB0FF]Clockwerk[/COLOR][/B][/SIZE]
+[SIZE=4]Schedule broadcasts, commands, restarts and events - all from an in-game GUI.[/SIZE][/CENTER]
+[HR]
+[B][SIZE=5]Runs things on a schedule, and does not lose track of it[/SIZE][/B]
+Announcements, console and player commands, server restarts and bossbars are all scheduled from an inventory GUI - no config file required, though everything is editable there too.
+
+The part most schedulers get wrong is what happens when the server was [B]off[/B] when a task was due. Clockwerk stores the next run, notices the mismatch on startup, and lets you choose per task: skip it, run it once on startup, or replay every run it missed (capped). A nightly restart that did not happen is a decision, not a surprise.
+
+Schedules can be a one-off moment, a daily or weekly wall-clock time, a fixed interval, or a full five-field cron expression.
+
+[B][SIZE=4][COLOR=#2BB0FF]Key Features[/COLOR][/SIZE][/B]
+[B]Five task types[/B]
+Broadcast, console command, player command, restart and bossbar.
+
+[B]Five schedule kinds[/B]
+Once, daily, weekly, interval and cron - with a hand-rolled five-field cron engine supporting ranges, steps, lists, month and day names and the classic Vixie day-of-month/day-of-week rule.
+
+[B]Missed-run policies[/B]
+Skip, run on startup, or catch up - chosen per task, capped so a month of downtime cannot become a storm.
+
+[B]Full in-game GUI[/B]
+Create, edit, clone, enable, disable, delete and review tasks through clean inventory screens, plus an upcoming-runs list and an execution history.
+
+[B]Bossbar restarts[/B]
+Warn before a run with as many countdown offsets as you like, and show a live bossbar countdown as a restart approaches.
+
+[B]Two storages[/B]
+SQLite by default - it keeps history and remembers the next run even through a crash - or a hand-editable tasks.yml.
+
+[B]Fully configurable & multilingual[/B]
+Supports English, Spanish, German, French, Italian, Dutch, Polish, Brazilian Portuguese and Russian. Customize language, timezone, storage and history retention.
+
+[B]Quiet where it should be[/B]
+Leave any message empty (or set it to `none`) to switch it off, so the plugin only speaks when it has something you want to hear.
+
+[B]Paper & Folia compatible[/B]
+Built for modern Paper servers and officially supports Folia, chosen at runtime.
+
+[B]Developer friendly[/B]
+A free Java API with cancelable events, plus PlaceholderAPI placeholders.
+
+[HR]
+[B][SIZE=4][COLOR=#2BB0FF]Commands[/COLOR][/SIZE][/B]
+[CODE]/cw
+/cw list
+/cw next
+/cw run <id>
+/cw enable <id>
+/cw disable <id>
+/cw delete <id>
+/cw reload[/CODE]
+
+Type [CODE]/cw[/CODE] in-game to open the GUI, and [CODE]/cw help[/CODE] to see full usage for each command.
+[B][SIZE=4][COLOR=#2BB0FF]Permissions[/COLOR][/SIZE][/B]
+[CODE]clockwerk.admin
+clockwerk.manage
+clockwerk.run
+clockwerk.reload
+clockwerk.next[/CODE]
+
+All permissions are standard op, so operators have them out of the box. Grant or revoke the individual nodes in your permissions plugin to shape access by role; [CODE]clockwerk.admin[/CODE] gives everything at once through its children.
+
+[B][SIZE=4][COLOR=#2BB0FF]Requirements[/COLOR][/SIZE][COLOR=#2BB0FF][/COLOR][/B]
+[LIST]
+[*]Paper 1.21+ (or Folia 1.21+)
+[*]Java 21+
+[*]PlaceholderAPI (optional, only for the placeholders)
+[*]SQLite (included)
+[/LIST]
+
+[B][SIZE=4][COLOR=#2BB0FF]Notes[/COLOR][/SIZE][/B]
+[LIST]
+[*]Every wall-clock schedule is read in the timezone you set in config.yml - most hosts call local time UTC, so write the zone you actually mean.
+[*]History is kept for 30 days by default; change it or keep it forever in config.yml.
+[*]Review your config after first install to tweak the timezone and storage for your server.
+[/LIST]
+
+[B]Designed for servers that want their announcements, restarts and routines to run on time - every time, even across a crash.[/B]
+
+[RIGHT][COLOR=#7FA0C2]Clockwerk by SrIruma and SrPinkyy[/COLOR][/RIGHT][/HR][/HR]

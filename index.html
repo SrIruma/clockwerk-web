@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clockwerk — Overview</title>
+    <meta name="description" content="Clockwerk — schedule broadcasts, commands, restarts and events from an in-game GUI, with cron, missed-run policies, SQLite or YAML storage, Folia support and a free API. Docs for Paper 1.21+.">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+        <div class="brand">
+            <a href="#overview" class="brand-link">Clockwerk</a>
+            <span class="brand-sub">Documentation</span>
+        </div>
+
+        <div class="search-wrap">
+            <input type="search" id="search" class="search" placeholder="Search docs…  ( / )"
+                   autocomplete="off" spellcheck="false" aria-label="Search documentation">
+        </div>
+
+        <div class="topbar-actions">
+            <a class="btn-buy" href="https://builtbybit.com/resources/clockwerk.133354" target="_blank" rel="noopener">
+                <span class="buy-full">Buy on BuiltByBit</span><span class="buy-short">Buy</span>
+            </a>
+            <a class="btn-icon" href="https://github.com/SrIruma" target="_blank" rel="noopener" title="SrIruma on GitHub" aria-label="SrIruma on GitHub">
+                <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav" id="nav"></nav>
+            <div class="nav-empty" id="nav-empty" hidden>No matches.</div>
+        </aside>
+
+        <main class="content" id="content">
+            <!-- ========================= DOCUMENTATION ========================= -->
+            <section class="page" id="page-overview" data-group="Documentation"
+                     data-title="Overview" data-keywords="intro schedule broadcast command restart bossbar cron missed runs gui sqlite yaml folia multilingual gui">
+                <div class="crumbs">Documentation</div>
+                <h1>Clockwerk</h1>
+                <p class="lead">Schedule broadcasts, commands, restarts and events from an in-game GUI — with cron, missed-run policies and a store that survives a crash. For Paper 1.21+ and Folia.</p>
+
+                <div class="meta">
+                    <span class="pill">Paper 1.21+</span>
+                    <span class="pill">Java 21</span>
+                    <span class="pill">Folia</span>
+                    <span class="pill">Cron</span>
+                    <span class="pill">SQLite / YAML</span>
+                </div>
+
+                <p>Clockwerk runs things on a schedule and does not lose track of it. Announcements, console and player commands, server restarts and bossbars are all scheduled from an inventory GUI — no config file required, though everything is editable there too. Schedules can be a one-off moment, a daily or weekly wall-clock time, a fixed interval, or a full five-field cron expression.</p>
+
+                <p>The part most schedulers get wrong is what happens when the server was <strong>off</strong> when a task was due. Clockwerk stores the next run, notices the mismatch on startup, and lets you decide per task: skip it, run it once on startup, or replay every run it missed (capped). A nightly restart that did not happen is a decision, not a surprise.</p>
+
+                <h2>What you get</h2>
+                <ul>
+                    <li><strong>Five task types</strong> — broadcast, console command, player command, restart and bossbar.</li>
+                    <li><strong>Five schedule kinds</strong> — once, daily, weekly, interval and cron.</li>
+                    <li><strong>Missed-run policies</strong> — skip, run on startup, or catch up, chosen per task.</li>
+                    <li><strong>Full in-game GUI</strong> — create, edit, clone, enable, disable, delete and review tasks, plus an upcoming list and an execution history.</li>
+                    <li><strong>Cron, built in</strong> — five fields, ranges, steps, lists, month and day names and the classic Vixie day-of-month/day-of-week rule.</li>
+                    <li><strong>Bossbar restarts</strong> — warn before a run with as many countdown offsets as you like.</li>
+                    <li><strong>Two storages</strong> — SQLite by default (keeps history and survives a crash), or a hand-editable <code>tasks.yml</code>.</li>
+                    <li><strong>Multilingual</strong> — English, Spanish, German, French, Italian, Dutch, Polish, Brazilian Portuguese and Russian.</li>
+                    <li><strong>Paper &amp; Folia</strong> — one jar, both platforms, chosen at runtime.</li>
+                    <li><strong>Developer friendly</strong> — a free Java API with cancelable events, plus PlaceholderAPI placeholders.</li>
+                </ul>
+
+                <div class="pager">
+                    <span></span>
+                    <a class="pager-next" data-goto="installation">Installation &rarr;</a>
+                </div>
+            </section>
+
+            <section class="page" id="page-installation" data-group="Documentation"
+                     data-title="Installation" data-keywords="requirements java paper folia setup plugins folder config lang storage sqlite yaml">
+                <div class="crumbs">Documentation</div>
+                <h1>Installation</h1>
+
+                <h2>What you need</h2>
+                <table class="table">
+                    <tbody>
+                        <tr><th>Server</th><td>Paper 1.21 or newer (Folia 1.21+ supported)</td></tr>
+                        <tr><th>Java</th><td>21+</td></tr>
+                        <tr><th>PlaceholderAPI</th><td>Optional — only for the placeholders</td></tr>
+                        <tr><th>Storage</th><td>SQLite (bundled) or YAML</td></tr>
+                    </tbody>
+                </table>
+
+                <h2>Setup</h2>
+                <ol>
+                    <li>Drop <code>Clockwerk.jar</code> into your <code>plugins/</code> folder.</li>
+                    <li>Start the server. It creates <code>plugins/Clockwerk/</code> with <code>config.yml</code> and the <code>lang/</code> folder.</li>
+                    <li>Run <code>/cw</code> in-game to open the GUI and create your first task, or grant permissions — see <a data-goto="permissions">Permissions</a>.</li>
+                </ol>
+
+                <div class="callout">
+                    <strong>Where things go.</strong> The plugin JAR sits in <code>plugins/</code>. Everything you edit lives in <code>plugins/Clockwerk/</code>: <code>config.yml</code>, <code>lang/</code>, and the database file <code>clockwerk.db</code> (or <code>tasks.yml</code> if you switch storage).
+                </div>
+
+                <div class="callout">
+                    <strong>Reloading.</strong> After editing <code>config.yml</code> or a language file, run <code>/cw reload</code> — it re-reads the config, the translations and every task in place. No restart needed.
+                </div>
+
+                <div class="pager">
+                    <a class="pager-prev" data-goto="overview">&larr; Overview</a>
+                    <a class="pager-next" data-goto="commands">Commands &rarr;</a>
+                </div>
+            </section>
+
+            <section class="page" id="page-commands" data-group="Documentation"
+                     data-title="Commands" data-keywords="cw clockwerk list next run enable disable delete reload usage">
+                <div class="crumbs">Documentation</div>
+                <h1>Commands</h1>
+                <p>Everything runs under <code>/clockwerk</code> (alias <code>/cw</code>).</p>
+
+                <table class="table">
+                    <thead>
+                        <tr><th>Command</th><th>What it does</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>/cw</code></td><td>Open the GUI. Needs <code>clockwerk.next</code>.</td></tr>
+                        <tr><td><code>/cw list</code></td><td>List every task with its state. Needs <code>clockwerk.next</code>.</td></tr>
+                        <tr><td><code>/cw next</code></td><td>Show the next upcoming runs across all tasks. Needs <code>clockwerk.next</code>.</td></tr>
+                        <tr><td><code>/cw run &lt;id&gt;</code></td><td>Run a task now, without waiting for its schedule. Needs <code>clockwerk.run</code>.</td></tr>
+                        <tr><td><code>/cw enable &lt;id&gt;</code></td><td>Arm a task. Needs <code>clockwerk.manage</code>.</td></tr>
+                        <tr><td><code>/cw disable &lt;id&gt;</code></td><td>Pause a task. Needs <code>clockwerk.manage</code>.</td></tr>
+                        <tr><td><code>/cw delete &lt;id&gt;</code></td><td>Remove a task. Needs <code>clockwerk.manage</code>.</td></tr>
+                        <tr><td><code>/cw reload</code></td><td>Reload config, language and tasks. Needs <code>clockwerk.reload</code>.</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="callout">
+                    <strong>In the GUI.</strong> Click a task to open its detail screen, where you can edit, clone, run, enable, disable or delete it. The upcoming list and the history tab are one click away from the main menu.
+                </div>
+
+                <div class="pager">
+                    <a class="pager-prev" data-goto="installation">&larr; Installation</a>
+                    <a class="pager-next" data-goto="permissions">Permissions &rarr;</a>
+                </div>
+            </section>
+
+            <section class="page" id="page-permissions" data-group="Documentation"
+                     data-title="Permissions" data-keywords="permission node admin manage run reload next op">
+                <div class="crumbs">Documentation</div>
+                <h1>Permissions</h1>
+                <p>Every node is standard op, so operators have them out of the box and a non-operator has none until a permissions plugin grants one. This is the ordinary Bukkit contract, so the server stays in charge of who may do what.</p>
+
+                <table class="table">
+                    <thead>
+                        <tr><th>Node</th><th>Default</th><th>What it allows</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>clockwerk.admin</code></td><td>op</td><td>Everything, through its children below.</td></tr>
+                        <tr><td><code>clockwerk.manage</code></td><td>op</td><td>Create, edit, clone and delete tasks.</td></tr>
+                        <tr><td><code>clockwerk.run</code></td><td>op</td><td>Run a task by hand, and use the GUI buttons that act on tasks.</td></tr>
+                        <tr><td><code>clockwerk.reload</code></td><td>op</td><td>Reload the configuration and language files.</td></tr>
+                        <tr><td><code>clockwerk.next</code></td><td>op</td><td>See the upcoming runs and open the GUI.</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="callout">
+                    <strong>Shaping access by role.</strong> <code>clockwerk.admin</code> grants all of the above at once. Grant or revoke the individual nodes in your permissions plugin if you want somebody to see the schedule without being able to change it.
+                </div>
+
+                <div class="pager">
+                    <a class="pager-prev" data-goto="commands">&larr; Commands</a>
+                    <a class="pager-next" data-goto="schedules">Schedules &rarr;</a>
+                </div>
+            </section>
+
+            <section class="page" id="page-schedules" data-group="Documentation"
+                     data-title="Schedules" data-keywords="once daily weekly interval anchor wall clock timezone schedule once daily weekly interval">
+                <div class="crumbs">Documentation</div>
+                <h1>Schedules</h1>
+                <p>A task has one schedule, chosen from five kinds. Wall-clock schedules are read in the timezone set in <code>config.yml</code>.</p>
+
+                <table class="table">
+                    <thead>
+                        <tr><th>Kind</th><th>Fires</th><th>Stored form</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Once</strong></td><td>A single date and time, then never again.</td><td><code>once:2026-12-31T23:00:00Z</code></td></tr>
+                        <tr><td><strong>Daily</strong></td><td>Every day at a fixed wall-clock time.</td><td><code>daily:04:00</code></td></tr>
+                        <tr><td><strong>Weekly</strong></td><td>Every week on a fixed day and time.</td><td><code>weekly:SUN:04:00</code></td></tr>
+                        <tr><td><strong>Interval</strong></td><td>Every N minutes, counted from an anchor.</td><td><code>interval:15:1735689600</code></td></tr>
+                        <tr><td><strong>Cron</strong></td><td>A five-field cron expression (see <a data-goto="cron">Cron</a>).</td><td><code>cron:&#42;/15 &#42; &#42; &#42; &#42;</code></td></tr>
+                    </tbody>
+                </table>
+
+                <div class="callout">
+                    <strong>Why interval has an anchor.</strong> "Every 15 minutes" needs a fixed starting point, or two servers — and the same server across a restart — would broadcast at different moments. The runs fall on <code>anchor + n × gap</code>, so the phase never drifts. The anchor is set when the task is created and stored as epoch seconds.
+                </div>
+
+                <div class="callout">
+                    <strong>Timezones.</strong> <code>timezone: "SERVER"</code> uses whatever the host calls local time, and most hosts call it UTC. If a daily <code>04:00</code> task fires at eight in the evening, that line is why — set it to the zone you actually mean, e.g. <code>"Europe/Madrid"</code>.
+                </div>
+
+                <div class="pager">
+                    <a class="pager-prev" data-goto="permissions">&larr; Permissions</a>
+                    <a class="pager-next" data-goto="cron">Cron &rarr;</a>
+                </div>
+            </section>
+
+            <section class="page" id="page-cron" data-group="Documentation"
+                     data-title="Cron" data-keywords="cron expression fields minute hour day month weekday range step list names vixie sunday">
+                <div class="crumbs">Documentation</div>
+                <h1>Cron</h1>
+                <p>Clockwerk speaks classic five-field cron: <code>minute hour day-of-month month day-of-week</code>. Pick the <strong>Cron</strong> schedule kind and type the expression.</p>
+
+                <h2>The fields</h2>
+                <table class="table">
+                    <thead>
+                        <tr><th>Field</th><th>Values</th><th>Notes</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>minute</td><td>0&ndash;59</td><td></td></tr>
+                        <tr><td>hour</td><td>0&ndash;23</td><td>24-hour clock.</td></tr>
+                        <tr><td>day-of-month</td><td>1&ndash;31</td><td></td></tr>
+                        <tr><td>month</td><td>1&ndash;12 or <code>JAN</code>..<code>DEC</code></td><td>Names are case-insensitive.</td></tr>
+                        <tr><td>day-of-week</td><td>0&ndash;7 or <code>SUN</code>..<code>SAT</code></td><td><code>0</code> and <code>7</code> are both Sunday.</td></tr>
+                    </tbody>
+                </table>
+
+                <h2>Syntax</h2>
+                <table class="table">
+                    <thead>
+                        <tr><th>Token</th><th>Means</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>&#42;</code></td><td>Every value in the field.</td></tr>
+                        <tr><td><code>5</code></td><td>Exactly that value.</td></tr>
+                        <tr><td><code>1-5</code></td><td>An inclusive range.</td></tr>
+                        <tr><td><code>&#42;/15</code></td><td>Every 15th value from the field's minimum.</td></tr>
+                        <tr><td><code>1,15,30</code></td><td>A list of any of the above.</td></tr>
+                    </tbody>
+                </table>
+
+                <h2>Examples</h2>
+                <table class="table">
+                    <thead>
+                        <tr><th>Expression</th><th>Fires</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>0 4 &#42; &#42; &#42;</code></td><td>Every day at 04:00.</td></tr>
+                        <tr><td><code>&#42;/15 &#42; &#42; &#42; &#42;</code></td><td>Every 15 minutes.</td></tr>
+                        <tr><td><code>0 9-17 &#42; &#42; 1-5</code></td><td>Every hour on the hour, 09:00&ndash;17:00, Monday to Friday.</td></tr>
+                        <tr><td><code>0 0 1 &#42; &#42;</code></td><td>Midnight on the first of every month.</td></tr>
+                        <tr><td><code>0 0 1 &#42; MON</code></td><td>The first of the month <em>and</em> every Monday (see below).</td></tr>
+                        <tr><td><code>30 23 &#42; &#42; 0</code></td><td>Every Sunday at 23:30.</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="callout">
+                    <strong>The Vixie rule.</strong> When both the day-of-month and the day-of-week fields are restricted, classic cron treats a day as matching when <em>either</em> side matches, not both. So <code>0 0 1 &#42; MON</code> fires on the first of every month and every Monday. Clockwerk follows this on purpose rather than "fixing" it — it is the behaviour people rely on.
+                </div>
+
+                <div class="pager">
+                    <a class="pager-prev" data-goto="schedules">&larr; Schedules</a>
+                    <a class="pager-next" data-goto="task-types">Task types &rarr;</a>
+                </div>
+            </section>
+
+            <section class="page" id="page-task-types" data-group="Documentation"
+                     data-title="Task types" data-keywords="broadcast console command player command restart bossbar duration warnings payload">
+                <div class="crumbs">Documentation</div>
+                <h1>Task types</h1>
+                <p>What a task does when it fires. The payload is the message, command or bossbar title it uses.</p>
+
+                <table class="table">
+                    <thead>
+                        <tr><th>Type</th><th>What it does</th><th>Payload</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Broadcast</strong></td><td>Sends a message to everyone online, console included.</td><td>The message text.</td></tr>
+                        <tr><td><strong>Console command</strong></td><td>Runs a command as the console. An unknown command is recorded as a failure, so it is visible in the history.</td><td>The command, with or without a leading slash.</td></tr>
+                        <tr><td><strong>Player command</strong></td><td>Runs a command as every online player.</td><td>The command, with or without a leading slash.</td></tr>
+                        <tr><td><strong>Restart</strong></td><td>Restarts the server. Falls back to a clean shutdown if the platform refuses the restart.</td><td>None.</td></tr>
+                        <tr><td><strong>Bossbar</strong></td><td>Shows a bossbar to the whole server for a number of seconds.</td><td>The title text, plus a duration.</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="callout">
+                    <strong>Colours.</strong> All text uses legacy colour codes with <code>&amp;</code> and hex with <code>&amp;#RRGGBB</code> — for example <code>&amp;cRestarting &amp;#FFAA00soon</code>.
+                </div>
+
+                <div class="callout">
+                    <strong>Warnings.</strong> Any task can have warning offsets (in seconds) so players are told before it runs — for example 600, 60 and 10 for ten minutes, one minute and ten seconds before. Warnings fire once each, largest offset first.
+                </div>
+
+                <div class="pager">
+                    <a class="pager-prev" data-goto="cron">&larr; Cron</a>
+                    <a class="pager-next" data-goto="missed-runs">Missed runs &rarr;</a>
+                </div>
+            </section>
+
+            <section class="page" id="page-missed-runs" data-group="Documentation"
+                     data-title="Missed runs" data-keywords="missed runs policy skip run on startup catchup offline downtime startup cap">
+                <div class="crumbs">Documentation</div>
+                <h1>Missed runs</h1>
+                <p>When the server comes back up, Clockwerk compares each task's stored next-run against now. If the run was due while the server was off, the task's policy decides what happens. A task that was not due is untouched, and a paused task is never caught up.</p>
+
+                <table class="table">
+                    <thead>
+                        <tr><th>Policy</th><th>What happens</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Skip</strong> <span class="muted">(default)</span></td><td>Nothing is run. The next run is recomputed from now, so the missed occurrence stays missed. A nightly restart that did not happen stays did-not-happen.</td></tr>
+                        <tr><td><strong>Run on startup</strong></td><td>Exactly one run: the earliest missed occurrence, fired once the server has finished starting. The following occurrences are <em>not</em> pulled forward — which is what stops a morning boot from turning into a restart loop.</td></tr>
+                        <tr><td><strong>Catch up</strong></td><td>Every missed occurrence, oldest first, capped by <code>engine.catchup-cap</code> so a month of downtime cannot flood the server in one tick.</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="callout">
+                    <strong>Why a delay.</strong> Catch-up runs wait a couple of seconds after startup, so a backlog cannot fire in the same tick that is still bringing worlds up.
+                </div>
+
+                <div class="pager">
+                    <a class="pager-prev" data-goto="task-types">&larr; Task types</a>
+                    <a class="pager-next" data-goto="configuration">Configuration &rarr;</a>
+                </div>
+            </section>
+
+            <section class="page" id="page-configuration" data-group="Documentation"
+                     data-title="Configuration" data-keywords="config.yml lang timezone storage sqlite yaml history retention catchup cap">
+                <div class="crumbs">Documentation</div>
+                <h1>Configuration</h1>
+                <p>Everything lives in <code>plugins/Clockwerk/config.yml</code>. Edit it, then run <code>/cw reload</code>.</p>
+
+                <table class="table">
+                    <thead>
+                        <tr><th>Key</th><th>What it does</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>lang</code></td><td>Language for all messages. Options: en, es, de, fr, it, nl, pl, pt-br, ru.</td></tr>
+                        <tr><td><code>timezone</code></td><td>The zone every wall-clock schedule is read in. <code>"SERVER"</code> uses the host's local time (usually UTC); write an explicit zone like <code>"Europe/Madrid"</code> if you mean it.</td></tr>
+                        <tr><td><code>storage.type</code></td><td><code>sqlite</code> (default) keeps history and remembers the next run through a crash. <code>yaml</code> uses a hand-editable <code>tasks.yml</code>, but history does not survive a restart.</td></tr>
+                        <tr><td><code>history.retention-days</code></td><td>How long execution history is kept (SQLite only). <code>0</code> keeps it forever. Default 30.</td></tr>
+                        <tr><td><code>engine.catchup-cap</code></td><td>The most runs a CATCHUP task may replay at startup. Default 10.</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="pager">
+                    <a class="pager-prev" data-goto="missed-runs">&larr; Missed runs</a>
+                    <a class="pager-next" data-goto="languages">Languages &rarr;</a>
+                </div>
+            </section>
+
+            <section class="page" id="page-languages" data-group="Documentation"
+                     data-title="Languages" data-keywords="lang messages translation messages-en yml silent none off colour">
+                <div class="crumbs">Documentation</div>
+                <h1>Languages</h1>
+                <p>Clockwerk ships nine languages. Every file is exported to <code>plugins/Clockwerk/lang/</code> on first start so you can edit it without unpacking the jar. Set <code>lang</code> in <code>config.yml</code> to choose one.</p>
+
+                <table class="table">
+                    <thead>
+                        <tr><th>Code</th><th>Language</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>en</code></td><td>English <span class="muted">(fallback for every other file)</span></td></tr>
+                        <tr><td><code>es</code></td><td>Spanish</td></tr>
+                        <tr><td><code>de</code></td><td>German</td></tr>
+                        <tr><td><code>fr</code></td><td>French</td></tr>
+                        <tr><td><code>it</code></td><td>Italian</td></tr>
+                        <tr><td><code>nl</code></td><td>Dutch</td></tr>
+                        <tr><td><code>pl</code></td><td>Polish</td></tr>
+                        <tr><td><code>pt-br</code></td><td>Brazilian Portuguese</td></tr>
+                        <tr><td><code>ru</code></td><td>Russian</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="callout">
+                    <strong>Quiet where it should be.</strong> Leave any message empty, or set it to <code>none</code>, <code>off</code> or <code>false</code>, to switch it off. That is different from deleting the line: a deleted line falls back to English on the next update, a blanked line stays silent.
+                </div>
+
+                <div class="pager">
+                    <a class="pager-prev" data-goto="configuration">&larr; Configuration</a>
+                    <a class="pager-next" data-goto="placeholders">Placeholders &rarr;</a>
+                </div>
+            </section>
+
+            <section class="page" id="page-placeholders" data-group="Documentation"
+                     data-title="Placeholders" data-keywords="placeholderapi placeholders next count enabled task id papi">
+                <div class="crumbs">Documentation</div>
+                <h1>Placeholders</h1>
+                <p>With PlaceholderAPI installed, these resolve for the player being looked at.</p>
+
+                <table class="table">
+                    <thead>
+                        <tr><th>Placeholder</th><th>What it gives</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>%clockwerk_next_&lt;id&gt;%</code></td><td>A countdown to the task's next run, like <code>3h 12m</code>, or <code>never</code>.</td></tr>
+                        <tr><td><code>%clockwerk_count%</code></td><td>How many enabled tasks exist.</td></tr>
+                        <tr><td><code>%clockwerk_enabled_&lt;id&gt;%</code></td><td><code>true</code> or <code>false</code> — whether that task is armed.</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="pager">
+                    <a class="pager-prev" data-goto="languages">&larr; Languages</a>
+                    <a class="pager-next" data-goto="api-overview">API &rarr;</a>
+                </div>
+            </section>
+
+            <!-- ============================== API ============================== -->
+            <section class="page" id="page-api-overview" data-group="API"
+                     data-title="Getting started" data-keywords="api clockwerkapi java gradle maven dependency provided servicesmanager services integration events">
+                <div class="crumbs">API</div>
+                <h1>Getting started</h1>
+                <p class="lead">Hook another plugin into Clockwerk — register a task from your own code, or react when one runs. The API is free to use.</p>
+
+                <p>The API is a small, self-contained jar you compile against. At runtime you obtain it from the Bukkit <code>ServicesManager</code>, so you can also ask whether Clockwerk is installed instead of crashing with a <code>ClassNotFoundException</code>. Nothing from the plugin's internals is exposed.</p>
+
+                <h2>Add the dependency</h2>
+                <p>Compile against <code>clockwerk-api</code> with <code>provided</code> scope, so it is never bundled into your own jar. It isn't on Maven Central; download it from the <a data-goto="api-downloads">API downloads</a> page.</p>
+                <p><strong>Maven</strong> — once the jar is in a repository you can resolve:</p>
+                <pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;dev.mugi&lt;/groupId&gt;
+  &lt;artifactId&gt;clockwerk-api&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+                <p>If it isn't published to a repository you use, install the downloaded jar into your local one:</p>
+                <pre><code>mvn install:install-file -Dfile=clockwerk-api.jar \
+  -DgroupId=dev.mugi -DartifactId=clockwerk-api \
+  -Dversion=1.0.0 -Dpackaging=jar</code></pre>
+                <p><strong>Gradle</strong> — drop the jar in <code>libs/</code> and point at it directly:</p>
+                <pre><code>dependencies {
+    compileOnly files("libs/clockwerk-api.jar")
+    // or, once it is in a repository:
+    // compileOnly "dev.mugi:clockwerk-api:1.0.0"
+}</code></pre>
+
+                <h2>Declare it in plugin.yml</h2>
+                <p>The server needs to know your plugin uses Clockwerk so it can load the classes at runtime.</p>
+                <pre><code>depend: [Clockwerk]
+# or, if Clockwerk is optional:
+softdepend: [Clockwerk]</code></pre>
+
+                <h2>Use it</h2>
+                <pre><code>ClockwerkAPI api = Bukkit.getServicesManager().load(ClockwerkAPI.class);
+if (api == null) {
+    getLogger().warning("Clockwerk is not installed.");
+    return;
+}
+
+// Read what is scheduled
+api.getTasks().forEach(view -&gt;
+        getLogger().info(view.name() + " next runs " + view.nextRun()));
+
+// Register a task from your own plugin
+ClockwerkTaskDraft draft = ClockwerkTaskDraft.builder()
+        .id("my_plugin_daily")
+        .name("Daily reward")
+        .type(TaskType.CONSOLE_COMMAND)
+        .schedule(ScheduleKind.DAILY, "04:00")
+        .payload("rewards give all")
+        .build();
+api.createTask(draft);</code></pre>
+
+                <div class="pager">
+                    <span></span>
+                    <a class="pager-next" data-goto="api-reference">API reference &rarr;</a>
+                </div>
+            </section>
+
+            <section class="page" id="page-api-reference" data-group="API"
+                     data-title="API reference" data-keywords="clockwerkapi methods createtask gettask gettasks runtask settaskenabled deletetask tasktype missedpolicy schedulekind clockwerktaskview upcomingrun events execute complete skipped cancellable">
+                <div class="crumbs">API</div>
+                <h1>API reference</h1>
+
+                <h2><code>ClockwerkAPI</code></h2>
+                <p>The interface you get from <code>Bukkit.getServicesManager().load(ClockwerkAPI.class)</code>. Every method must be called from the main thread.</p>
+                <table class="table">
+                    <thead>
+                        <tr><th>Method</th><th>Returns</th><th>What it does</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>createTask(ClockwerkTaskDraft)</code></td><td><code>ClockwerkTaskView</code></td><td>Registers a task from a draft. Throws <code>IllegalStateException</code> if the id is already taken.</td></tr>
+                        <tr><td><code>getTask(String)</code></td><td><code>Optional&lt;ClockwerkTaskView&gt;</code></td><td>One task by id.</td></tr>
+                        <tr><td><code>getTasks()</code></td><td><code>Collection&lt;ClockwerkTaskView&gt;</code></td><td>Every loaded task.</td></tr>
+                        <tr><td><code>runTask(String)</code></td><td><code>boolean</code></td><td>Runs a task now, as if an admin clicked "run now". Returns whether the task existed.</td></tr>
+                        <tr><td><code>setTaskEnabled(String, boolean)</code></td><td><code>boolean</code></td><td>Arms or pauses a task. Returns whether the task existed.</td></tr>
+                        <tr><td><code>deleteTask(String)</code></td><td><code>boolean</code></td><td>Removes a task. Returns whether it existed.</td></tr>
+                        <tr><td><code>getUpcoming()</code></td><td><code>List&lt;UpcomingRun&gt;</code></td><td>The next runs across all tasks, soonest first.</td></tr>
+                    </tbody>
+                </table>
+
+                <h2>The <code>ClockwerkTaskView</code> record</h2>
+                <p>An immutable, read-only view of a loaded task. It holds only definition data and the run times, never the store's internals.</p>
+                <table class="table">
+                    <thead>
+                        <tr><th>Accessor</th><th>Type</th><th>What it is</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>id()</code></td><td><code>String</code></td><td>The task id.</td></tr>
+                        <tr><td><code>name()</code></td><td><code>String</code></td><td>The display name.</td></tr>
+                        <tr><td><code>type()</code></td><td><code>TaskType</code></td><td>What the task does.</td></tr>
+                        <tr><td><code>scheduleKind()</code></td><td><code>ScheduleKind</code></td><td>The schedule's kind.</td></tr>
+                        <tr><td><code>scheduleDetail()</code></td><td><code>String</code></td><td>A short description of the schedule parameters.</td></tr>
+                        <tr><td><code>payload()</code></td><td><code>String</code></td><td>The message, command or bossbar title.</td></tr>
+                        <tr><td><code>missedPolicy()</code></td><td><code>MissedPolicy</code></td><td>What happens to runs the server slept through.</td></tr>
+                        <tr><td><code>enabled()</code></td><td><code>boolean</code></td><td>Whether the task is armed.</td></tr>
+                        <tr><td><code>lastRun()</code></td><td><code>Optional&lt;Instant&gt;</code></td><td>When it last executed.</td></tr>
+                        <tr><td><code>nextRun()</code></td><td><code>Optional&lt;Instant&gt;</code></td><td>When it will next execute.</td></tr>
+                    </tbody>
+                </table>
+
+                <h2>The <code>ClockwerkTaskDraft</code></h2>
+                <p>What you build to register a task. The schedule is set from a <code>ScheduleKind</code> plus the parameters that kind needs.</p>
+                <table class="table">
+                    <thead>
+                        <tr><th>Kind</th><th>Parameters</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>ONCE</code></td><td>An ISO instant, e.g. <code>"2026-12-31T23:00:00Z"</code>.</td></tr>
+                        <tr><td><code>DAILY</code></td><td><code>"HH:mm"</code>.</td></tr>
+                        <tr><td><code>WEEKLY</code></td><td><code>"DAY:HH:mm"</code>, e.g. <code>"SUN:04:00"</code>.</td></tr>
+                        <tr><td><code>INTERVAL</code></td><td>Minutes, e.g. <code>"15"</code>.</td></tr>
+                        <tr><td><code>CRON</code></td><td>A five-field expression.</td></tr>
+                    </tbody>
+                </table>
+
+                <h2>Events</h2>
+                <table class="table">
+                    <thead>
+                        <tr><th>Event</th><th>What it's for</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>TaskExecuteEvent</code></td><td>Fired before a task's action runs. <strong>Cancellable</strong> — cancel it and the run is dropped (and recorded as skipped).</td></tr>
+                        <tr><td><code>TaskCompleteEvent</code></td><td>Fired after the action runs, whether it succeeded or threw. Record metrics or mirror a restart into Discord here.</td></tr>
+                        <tr><td><code>TaskSkippedEvent</code></td><td>Fired when a run is dropped — by a listener cancelling it, or by the missed-run policy. Carries the reason.</td></tr>
+                    </tbody>
+                </table>
+
+                <h2>Listening</h2>
+                <pre><code>@EventHandler
+public void onExecute(TaskExecuteEvent event) {
+    // Hold a restart during a tournament, for example
+    if (event.task().type() == TaskType.RESTART
+            &amp;&amp; tournamentIsRunning()) {
+        event.setCancelled(true);
+    }
+}</code></pre>
+
+                <div class="pager">
+                    <a class="pager-prev" data-goto="api-overview">&larr; Getting started</a>
+                    <a class="pager-next" data-goto="api-downloads">API downloads &rarr;</a>
+                </div>
+            </section>
+
+            <section class="page" id="page-api-downloads" data-group="API"
+                     data-title="API downloads" data-keywords="download jar sources javadoc artifact clockwerk-api free">
+                <div class="crumbs">API</div>
+                <h1>API downloads</h1>
+                <p class="lead">The API is free to use from any plugin.</p>
+
+                <table class="table">
+                    <thead>
+                        <tr><th>File</th><th>What it's for</th><th>Download</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>clockwerk-api.jar</code></td>
+                            <td>Compiled API to build against (<code>provided</code>).</td>
+                            <td><a class="btn" href="api/clockwerk-api.jar" download>Download</a></td>
+                        </tr>
+                        <tr>
+                            <td><code>clockwerk-api-sources.jar</code></td>
+                            <td>The API sources, if you want to read them.</td>
+                            <td><a class="btn" href="api/clockwerk-api-sources.jar" download>Download</a></td>
+                        </tr>
+                        <tr>
+                            <td><code>clockwerk-api-javadoc.jar</code></td>
+                            <td>Generated Javadoc.</td>
+                            <td><a class="btn" href="api/clockwerk-api-javadoc.jar" download>Download</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="muted">Build against it with <code>provided</code> scope and never bundle it into your own jar.</p>
+
+                <div class="pager">
+                    <a class="pager-prev" data-goto="api-reference">&larr; API reference</a>
+                    <span></span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <span>Clockwerk © 2026 SrIruma &amp; SrPinkyy</span>
+        <span class="footer-sep">·</span>
+        <a href="https://github.com/SrIruma" target="_blank" rel="noopener">GitHub</a>
+        <span class="footer-sep">·</span>
+        <a href="https://builtbybit.com/resources/clockwerk.133354" target="_blank" rel="noopener">Buy on BuiltByBit</a>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
